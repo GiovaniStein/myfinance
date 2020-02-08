@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+body {
+    background: #E5E6F0 !important;
+    -webkit-font-smoothing: antialiased;
+}
+
+html, body, #root {
+    height: 99%;
+}
+
+body, input, button {
+    font-family: Roboto, sans-serif;
+}
+
+.loadIcon {
+    position: absolute !important;
+    bottom: 4%;
+    left: 94%;
+}
+
+.buttonEdit{
+    color: #ffffff !important;
+    background-color: #f8c734 !important;
+}
+
+.button-danger {  
+    color: #ffffff !important;
+    background: #e5473b !important;
+}
+
+form .input-container label{
+    color: #ACACAC;
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+}
+
+form .input-container {
+    margin-top: 10px;
+}
+
+.titleForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleForm i {
+    margin-right: 10px;
+    font-size: 25px;
+}

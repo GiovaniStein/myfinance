@@ -1,0 +1,58 @@
+body {
+    background-image: unset
+}
+
+.trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.trigger:hover {
+    color: #1890ff;
+}
+
+.homeContainer, .homeContainer section {
+    height: 100%;
+}
+
+.homeContainer .ant-layout-sider-children, .homeContainer .ant-menu-submenu-title, .homeContainer .ant-menu-submenu-active {
+    background-color: #212121 !important;
+}
+
+.homeContainer .ant-menu-submenu-title {
+    margin: 0 !important;
+}
+
+.homeContainer .logo {
+    background-color: #42a5f5 !important;
+    height: 64px;
+    margin: 0;
+}
+
+.homeContainer .ant-layout-header {
+    background-color: #1890ff !important;
+}
+
+.homeContainer .ant-layout-header i {
+    color: #ffffff;
+}
+
+.homeContainer .ant-menu.ant-menu-sub.ant-menu-inline {
+    background-color: #212121;
+}
+
+.homeContainer .ant-menu-dark .ant-menu-inline.ant-menu-sub {
+    box-shadow: unset !important;
+}
+
+.ant-menu-dark, .ant-menu-dark .ant-menu-sub {
+    background: #212121 !important;
+    background-color: #212121 !important;
+}
+
+#homeContainer{
+    height: 100%;
+}

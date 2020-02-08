@@ -1,0 +1,60 @@
+.mainDiv {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginFormContainer {
+    width: 320px;
+    background: #FFF;
+    box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.02);
+    border-radius: 2px;
+    padding: 30px 20px;
+}
+
+.loginFormContainer strong {
+    font-size: 20px;
+    text-align: center;
+    display: block;
+    color: #333;
+}
+
+.loginFormContainer form {
+    margin-top: 30px;
+}
+
+.loginFormContainer form .input-container {
+    margin-top: 10px;
+}
+
+.loginFormContainer form .input-container label {
+    color: #ACACAC;
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+}
+
+.loginFormContainer form button {
+    width: 100%;
+    border: 0;
+    margin-top: 30px;
+    border-radius: 2px;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
+
+.loginFormContainer form button[type=submit] {
+    background: #0982f3;
+}
+
+.loginFormContainer .button-danger {  
+    margin-top: 15px;
+    background: #e5473b;
+}
+
+
+
