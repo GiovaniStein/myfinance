@@ -18,17 +18,17 @@ body, input, button {
     left: 94%;
 }
 
-.buttonEdit{
+.buttonEdit {
     color: #ffffff !important;
     background-color: #f8c734 !important;
 }
 
-.button-danger {  
+.button-danger {
     color: #ffffff !important;
     background: #e5473b !important;
 }
 
-form .input-container label{
+form .input-container label {
     color: #ACACAC;
     font-size: 14px;
     font-weight: bold;
@@ -42,10 +42,61 @@ form .input-container {
 .titleForm {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
 }
 
 .titleForm i {
     margin-right: 10px;
     font-size: 25px;
+}
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.listSearchContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+.homeContainer table {
+    margin-top: 15px !important;
+}
+
+.listSearchContainer button {
+    margin-left: 10px;
+}
+
+.searchField.ant-input-affix-wrapper {
+    width: 45% !important;
+}
+
+.listSearchContainer div:last-of-type {
+    width: 100%;
+}
+
+.listSearchContainer div:last-of-type button {
+    float: right;
 }

@@ -5,7 +5,7 @@ import TableButtons from '../../components/formcomp/TableButtons';
 import { Link, withRouter } from "react-router-dom";
 
 
-const ListCategory = (props) => {
+const OperationList = (props) => {
 
     const data = [
         {
@@ -56,7 +56,7 @@ const ListCategory = (props) => {
         <div>
             <div className="titleForm">
                 <Icon type="tags" />
-                <strong>Listagem de Categorias</strong>
+                <strong>Listagem Operações</strong>
             </div>
             <div className="listSearchContainer">
                 <Input className="searchField" prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />} />
@@ -66,7 +66,7 @@ const ListCategory = (props) => {
                     </Button>
                 </div>
                 <div>
-                    <Link to="/home/category/create">
+                    <Link to="/home/operation/create">
                         <Button icon="plus" type="primary" />
                     </Link>
                 </div>
@@ -77,4 +77,4 @@ const ListCategory = (props) => {
         </div>
     )
 }
-export default withRouter(ListCategory);
+export default withRouter(OperationList);

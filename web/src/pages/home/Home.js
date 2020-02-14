@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import { Link, withRouter, Route, Switch } from "react-router-dom";
 import ListCategory from '../category/ListCategory';
 import CreateCategory from '../category/CreateCategory';
+import CreateOperation from '../payment/CreateOperation';
+import ListOperation from '../payment/ListOperation';
 import { Layout, Menu, Icon } from 'antd';
 import './Home.css';
 
@@ -32,6 +34,11 @@ const Home = (props) => {
                             <Icon type="tags" />
                             <span>Categoria</span>
                             <Link to="/home/category/list" />
+                        </Menu.Item>
+                        <Menu.Item key="3">
+                            <Icon type="dollar" />
+                            <span>Operação</span>
+                            <Link to="/home/operation/list" />
                         </Menu.Item>
                         {/* <SubMenu
                             key="sub1"
@@ -80,6 +87,8 @@ const Home = (props) => {
                                 <Route path="/home/dashboard" component={() => <h1>Dashboard</h1>} />
                                 <Route path="/home/category/list" component={ListCategory} />
                                 <Route path="/home/category/create" component={CreateCategory} />
+                                <Route path="/home/operation/create" component={CreateOperation} />
+                                <Route path="/home/operation/list" component={ListOperation} />
                                 {/* <PrivateRoute path="/app" component={() => <h1>App</h1>} /> */}
                             </Switch>
                         </div>
