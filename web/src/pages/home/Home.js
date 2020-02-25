@@ -1,17 +1,27 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link, withRouter, Route, Switch } from "react-router-dom";
 import ListCategory from '../category/ListCategory';
 import CreateCategory from '../category/CreateCategory';
 import CreateOperation from '../payment/CreateOperation';
 import ListOperation from '../payment/ListOperation';
+import Dashboard from '../dashboard/Dashboard';
 import { Layout, Menu, Icon } from 'antd';
 import './Home.css';
+import { useSelector, useDispatch } from 'react-redux';
 
 const { Header, Sider, Content } = Layout;
 
 const { SubMenu } = Menu;
 
 const Home = (props) => {
+
+   const user = useSelector(state =>  state.user);
+
+    const dispatch = useDispatch();
+
+    const changeUser = () => { 
+        dispatch({type: 'LOGIN_USER', user:{id: user == null ? 0 : user.id+1, nome: user == null ? '' : user.nome+'a'}})
+    }
 
     useEffect(() => {
         props.history.push("/home/dashboard");
@@ -84,7 +94,7 @@ const Home = (props) => {
                     >
                         <div>
                             <Switch>
-                                <Route path="/home/dashboard" component={() => <h1>Dashboard</h1>} />
+                                <Route path="/home/dashboard" component={Dashboard} />
                                 <Route path="/home/category/list" component={ListCategory} />
                                 <Route path="/home/category/create" component={CreateCategory} />
                                 <Route path="/home/operation/create" component={CreateOperation} />

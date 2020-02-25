@@ -1,0 +1,44 @@
+.dashboardContainer .kpiLine {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboardContainer .kpiLine .kpiContainer {
+    width: 20%;
+    height: 112px;
+    margin-left: 30px;
+}
+
+.dashboardContainer .kpiLine .kpiObject {
+    padding: 16px;
+    color: #ffffff;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    height: 100%;
+}
+
+
+.dashboardContainer .kpiLine .kpiObject.blue {
+    background-color: #42A5F5;
+    
+}
+
+.dashboardContainer .kpiLine .kpiObject.purple {
+    background-color: #7E57C2;
+    
+}
+
+.dashboardContainer .kpiLine .kpiObject.yellow {
+    background-color: #FFB300;
+    
+}
+
+.dashboardContainer .kpiLine .kpiObject.green {
+    background-color: #66BB6A;
+    
+}
