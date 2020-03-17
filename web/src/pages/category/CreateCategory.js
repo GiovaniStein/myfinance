@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import { Input, Icon, Switch } from 'antd';
+import { Input, Icon, Switch, Spin } from 'antd';
 import ModalIconsList from '../../components/modal/ModalIconsList';
 import SubmitContent from '../../components/formcomp/SubmitContent';
 import Api from '../../service/Api';
