@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const user = require('./UserQueries');
-const category = require('./CategoryQueries')
+const user = require('./controller/user');
+const category = require('./controller/category')
 
 const routes = Router();
 
@@ -8,13 +8,9 @@ const routes = Router();
 //Route Params: request.params
 //Body: request.body
 
-routes.get('/users', user.getUsers);
-
 routes.post('/users', user.createUser);
 
 routes.post('/users/login', user.verifyLogin);
-
-routes.delete('/users/:id', user.deleteUser);
 
 routes.put('/users/:id', user.updateUser);
 
