@@ -16,12 +16,11 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db) {
-  var filePath = path.join(__dirname, 'sqls', '202005051650-create-table.sql');
+  var filePath = path.join(__dirname, 'sqls', '20200505165010-create-table-up.sql');
   return new Promise( function( resolve, reject ) {
     fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
       if (err) return reject(err);
       console.log('received data: ' + data);
-
       resolve(data);
     });
   })
@@ -31,7 +30,17 @@ exports.up = function(db) {
 };
 
 exports.down = function(db) {
-   return null;
+  var filePath = path.join(__dirname, 'sqls', '20200505165010-create-table-down.sql');
+  return new Promise( function( resolve, reject ) {
+    fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
+      if (err) return reject(err);
+      console.log('received data: ' + data);
+      resolve(data);
+    });
+  })
+  .then(function(data) {
+    return db.runSql(data);
+  });
 };
 
 exports._meta = {

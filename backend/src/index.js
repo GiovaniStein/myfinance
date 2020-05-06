@@ -18,9 +18,7 @@ var dbConfig = {
 
 
 var dbMyFinance = DBMigrate.getInstance(true, { env: 'dev', config: dbConfig });
-var dbStartConfig = dbConfig;
-dbStartConfig.dev.database = Config.DB_START_NAME;
-var dbStart = DBMigrate.getInstance(true, { env: 'dev', config: dbStartConfig });
+
 
 
 app.use((req, res, next) => {
@@ -32,19 +30,8 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(routes);
 
-
-dbStart.createDatabase("myfinance")
-.then(function() {
-  console.log('foi 1');
-  dbMyFinance.up().then(function() {
-    app.listen(Config.PORT);
-  });
-})
-.catch(function(e) {
-  dbMyFinance.up().then(function() {
-    console.log('foi 2');
-    app.listen(Config.PORT);
-  });
-});
-
+dbMyFinance.reset()
+.then( () => dbMyFinance.up().then(function() {
+  app.listen(Config.PORT);
+}) );
 
