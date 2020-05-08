@@ -16,7 +16,7 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db) {
-  var filePath = path.join(__dirname, 'sqls', '20200505165010-create-table-up.sql');
+  var filePath = path.join(__dirname, 'sqls', '20200507090515-add-master-user.sql');
   return new Promise( function( resolve, reject ) {
     fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
       if (err) return reject(err);

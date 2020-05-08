@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const user = require('./controller/user');
-const category = require('./controller/category')
+const user = require('./dao/userQueries');
+const category = require('./dao/categoryQueries')
 
 const routes = Router();
 
@@ -15,6 +15,8 @@ routes.post('/users/login', user.verifyLogin);
 routes.put('/users/:id', user.updateUser);
 
 routes.get('/category', category.getCategoriesByUser);
+
+routes.get('/category/count', category.countCategories);
 
 routes.post('/category', category.createCategory);
 

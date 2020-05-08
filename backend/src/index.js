@@ -16,13 +16,11 @@ var dbConfig = {
   }
 };
 
-
 var dbMyFinance = DBMigrate.getInstance(true, { env: 'dev', config: dbConfig });
-
-
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
@@ -30,8 +28,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(routes);
 
-dbMyFinance.reset()
-.then( () => dbMyFinance.up().then(function() {
+dbMyFinance.up().then(function() {
   app.listen(Config.PORT);
-}) );
+});
 

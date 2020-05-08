@@ -4,7 +4,8 @@ import { Input, Icon, Switch, Spin } from 'antd';
 import ModalIconsList from '../../components/modal/ModalIconsList';
 import SubmitContent from '../../components/formcomp/SubmitContent';
 import Api from '../../service/Api';
-import Alert from '../../components/alert/Alert'
+
+
 
 
 const CreateCategory = (props) => {
@@ -13,19 +14,23 @@ const CreateCategory = (props) => {
     const [categoryName, setCategoryName] = useState('');
     const [categoryEnable, setCategoryEnable] = useState(true);
     const [loading, setLoading] = useState(false);
+    const editObject = props.location.editObject;
 
-
-    /* useEffect(() => {
-        
-    }, []); */
+    useEffect(() => {
+        if (!!editObject) {
+            setCategoryName(editObject.name);
+            setSelectIcon(editObject.icon);
+            setCategoryEnable(editObject.enable);
+        }
+    }, []);
 
     async function handleSubmit(e) {
         setLoading(true);
         e.preventDefault();
         const category = {
-            category_name: categoryName,
-            icon_name: selectIcon,
-            category_enable: categoryEnable
+            name: categoryName,
+            icon: selectIcon,
+            enable: categoryEnable
         }
         const response = Api.CrudApi.save('category', category)
         if (!!response) {
@@ -47,6 +52,7 @@ const CreateCategory = (props) => {
                             <Input
                                 type="text"
                                 placeholder="Nome"
+                                value={categoryName}
                                 name="category_name" id="category_name"
                                 required
                                 onChange={e => { setCategoryName(e.target.value) }}
@@ -64,6 +70,7 @@ const CreateCategory = (props) => {
                             <Switch
                                 name="category_enable"
                                 id="category_enable"
+                                defaultChecked={categoryEnable}
                                 onChange={e => { setCategoryEnable(e) }}
                             />
                         </div>
@@ -76,7 +83,6 @@ const CreateCategory = (props) => {
                 <Spin className="loadIcon" size="large" />
             }
         </div>
-
     )
 }
 export default withRouter(CreateCategory);

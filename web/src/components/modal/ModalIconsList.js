@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import IconsAsset from "../../utils/IconsAsset";
 import "./IconsList.css"
 import { Icon, Input, Button, Modal } from 'antd';
 import './ModalForm.css';
 
 
-const IconsList = ({ saveIcon = "tags", changeIcon = (icon) => {}, ...props }) => {
+const IconsList = ({ saveIcon = 'tags', changeIcon = (icon) => {}, ...props }) => {
 
     const [icons, setIcons] = useState(IconsAsset.icons);
     const [selectIcon, setSelectIcon] = useState(saveIcon);
     const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        setSelectIcon(saveIcon)
+    }, [saveIcon]);
     
     function onSelectIcon(icon) {
         const iconSelect = document.getElementsByClassName('select');
@@ -70,10 +74,6 @@ const IconsList = ({ saveIcon = "tags", changeIcon = (icon) => {}, ...props }) =
                 </div>
             </Modal>
         </div>
-
-
-
-
     )
 }
 

@@ -1,23 +1,35 @@
 import React from "react";
-import {Button} from 'antd';
+import { Button } from 'antd';
 import './TableButtons.css';
+import { Link, withRouter } from "react-router-dom";
+import Api from '../../service/Api';
+import Alert from '../alert/Alert';
 
-const TableButtons = ({objectId, ...props}) => {
+const TableButtons = ({ editObject = {}, endpoint = '', updateTable = () => { }, ...props }) => {
 
-    const editFunction = (e) => {
-        console.log(objectId);
+    const deleteRow = async () => {
+        await Api.CrudApi.delete(endpoint, editObject.id);
+        updateTable();
     }
 
     const disableFunction = (e) => {
-        console.log(objectId);
+        Alert.showDeleteConfirm('categoria', deleteRow);
     }
+
+
+    const toLink = {
+        pathname: `/home/${endpoint}/create`,
+        editObject: editObject
+    };
 
     return (
         <div className="tableButtonsContainer">
-            <Button type="default" onClick={editFunction} className="buttonEdit" icon="edit" size="small" />
-            <Button type="default" onClick={disableFunction} className="button-danger" icon="delete" size="small"/>
+            <Link to={toLink}>
+                <Button type="default" className="buttonEdit" icon="edit" size="small" />
+            </Link>
+            <Button type="default" onClick={disableFunction} className="button-danger" icon="delete" size="small" />
         </div>
     )
 }
 
-export default TableButtons;
+export default withRouter(TableButtons);
