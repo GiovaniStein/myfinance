@@ -86,18 +86,8 @@ form .input-container {
     margin-top: 15px !important;
 }
 
-.listSearchContainer button {
-    margin-left: 10px;
-}
-
-.searchField.ant-input-affix-wrapper {
-    width: 45% !important;
-}
-
-.listSearchContainer div:last-of-type {
-    width: 100%;
-}
-
-.listSearchContainer div:last-of-type button {
-    float: right;
+.buttonAddContainer button {
+    position: absolute;
+    left: calc(100% - 71px);
+    top: 18.5%;
 }

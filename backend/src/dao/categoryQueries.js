@@ -5,7 +5,14 @@ const getCategoriesByUser = (request, response) => {
     const userID = 1;
     const offset = parseInt(request.query.offset);
     const limit = parseInt(request.query.limit);
-    db.pool.query('SELECT id, name, icon, enable FROM "category" WHERE "user_id" = $1 ORDER BY "id" ASC OFFSET $2 LIMIT $3', [userID, offset, limit], (error, results) => {
+    const search = request.query.search;
+    var query = 'SELECT id, name, icon, enable FROM "category" WHERE "user_id" = $1 ORDER BY "id" ASC OFFSET $2 LIMIT $3';
+    var params = [userID, offset, limit];
+    if (!!search) {
+        query = 'SELECT id, name, icon, enable FROM "category" WHERE "user_id" = $1 AND "name" LIKE $2 ORDER BY "id" ASC OFFSET $3 LIMIT $4';
+        params = [userID, '%' + search + '%', offset, limit];
+    }
+    db.pool.query(query, params, (error, results) => {
         if (error) {
             throw error
         }
@@ -16,7 +23,14 @@ const getCategoriesByUser = (request, response) => {
 const countCategories = (request, response) => {
     //const userID = parseInt(request.params.userId);
     const userID = 1;
-    db.pool.query('SELECT count(*) FROM "category" WHERE "user_id" = $1', [userID], (error, results) => {
+    const search = request.query.search;
+    var query = 'SELECT count(*) FROM "category" WHERE "user_id" = $1';
+    var params = [userID];
+    if (!!search) {
+        query = 'SELECT count(*) FROM "category" WHERE "user_id" = $1 AND "name" LIKE $2'
+        params = [userID, '%' + search + '%'];
+    }
+    db.pool.query(query, params, (error, results) => {
         if (error) {
             throw error
         }
@@ -35,28 +49,27 @@ const getCategoryById = (request, response) => {
 }
 
 const createCategory = (request, response) => {
-    const { name, icon, enable } = request.body
+    const { name, icon, enable } = request.body;
     //const userID = parseInt(request.params.userId);
     const userId = 1;
     db.pool.query('INSERT INTO "category" ("name", "icon", "enable", "user_id") VALUES ($1, $2, $3, $4)', [name, icon, enable, userId], (error, results) => {
         if (error) {
+            response.status(500).send(false);
             throw error
         }
-        response.status(201).send(`User added`);
+        response.status(201).send(true);
     })
 }
 
 const updateCategory = (request, response) => {
     const id = parseInt(request.params.id);
-    const { category_name, category_icon, category_enable } = request.body
-    db.pool.query(
-        'UPDATE "category" SET "name" = $1, "icon" = $2, "enable" = $3 WHERE "id" = $3',
-        [category_name, category_icon, category_enable, id],
-        (error, results) => {
+    const { name, icon, enable } = request.body;
+    db.pool.query('UPDATE "category" SET "name" = $1, "icon" = $2, "enable" = $3 WHERE "id" = $4', [name, icon, enable, id], (error, results) => {
             if (error) {
+                response.status(500).send(false);
                 throw error
             }
-            response.status(200).send(`User modified with ID: ${id}`)
+            response.status(200).send(true);
         }
     )
 }

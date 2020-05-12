@@ -14,13 +14,7 @@ const ListCategory = (props) => {
                 <Icon type="tags" />
                 <strong>Listagem de Categorias</strong>
             </div>
-            <div className="listSearchContainer">
-                <Input className="searchField" prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />} />
-                <div>
-                    <Button icon="search" type="primary">
-                        Pesquisar
-                    </Button>
-                </div>
+            <div className="buttonAddContainer">
                 <div>
                     <Link to="/home/category/create">
                         <Button icon="plus" type="primary" />

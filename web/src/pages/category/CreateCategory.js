@@ -5,9 +5,6 @@ import ModalIconsList from '../../components/modal/ModalIconsList';
 import SubmitContent from '../../components/formcomp/SubmitContent';
 import Api from '../../service/Api';
 
-
-
-
 const CreateCategory = (props) => {
 
     const [selectIcon, setSelectIcon] = useState('tags');
@@ -24,7 +21,7 @@ const CreateCategory = (props) => {
         }
     }, []);
 
-    async function handleSubmit(e) {
+   async function handleSubmit(e) {
         setLoading(true);
         e.preventDefault();
         const category = {
@@ -32,8 +29,8 @@ const CreateCategory = (props) => {
             icon: selectIcon,
             enable: categoryEnable
         }
-        const response = Api.CrudApi.save('category', category)
-        if (!!response) {
+        const response = !!editObject ? await Api.CrudApi.update('category', editObject.id, category) : await Api.CrudApi.save('category', category);
+        if (response) {
             props.history.push("/home/category/list");
         }
         setLoading(false)

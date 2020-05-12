@@ -6,17 +6,23 @@ const api = axios.create({
 })
 
 class ListApi {
-    static listValues = async (endpoint, offset, limit) => {
+    static listValues = async (endpoint, offset, limit, search) => {
         try {
             const response = await api.get(`/${endpoint}`, {
                 params:
                 {
                     offset: offset,
-                    limit: limit
+                    limit: limit,
+                    search: search,
                 }
             });
             if (!!response.data && response.status === 200) {
-                const countValues = await api.get(`/${endpoint}/count`);
+                const countValues = await api.get(`/${endpoint}/count`, {
+                    params:
+                    {
+                        search: search,
+                    }
+                });
                 const paginationData = {
                     data: response.data,
                     countValues: parseInt(countValues.data[0].count)
@@ -36,11 +42,10 @@ class UserApi {
             const response = await api.post('/users/login', { email, password });
             if (!!response.data && response.status === 200) {
                 return response.data[0];
-            } else {
-                return {};
             }
         } catch (e) {
             console.error(e);
+            return false;
         }
     }
 }
@@ -50,28 +55,30 @@ class CrudApi {
     static save = async (endpoint, object) => {
         try {
             const response = await api.post(`/${endpoint}`, object);
-            if (!!response.data && response.status === 201) {
+            if (response.status === 201) {
                 Alert.ToastMessage({ title: 'Sucesso', type: 'success', description: 'Operação de cadastro finalizado com sucesso!' });
-                return response.data[0];
             } else {
                 Alert.ToastMessage({ title: 'Erro', type: 'error', description: 'Ocorreu um erro ao finalizar o cadastro!' });
-                return {};
             }
+            return response.data;
         } catch (e) {
             console.error(e);
+            return false;
         }
     }
 
     static update = async (endpoint, id, object) => {
         try {
             const response = await api.put(`/${endpoint}/${id}`, object);
-            if (!!response.data && response.status === 200) {
-                return response.data[0];
+            if (response.status === 200) {
+                Alert.ToastMessage({ title: 'Sucesso', type: 'success', description: 'Atualização de registro finalizado com sucesso!' });
             } else {
-                return {};
+                Alert.ToastMessage({ title: 'Erro', type: 'error', description: 'Ocorreu um erro ao tentar atualizar o registro!' });
             }
+            return response.data;
         } catch (e) {
             console.error(e);
+            return false;
         }
     }
 

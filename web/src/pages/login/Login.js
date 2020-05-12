@@ -24,7 +24,6 @@ const Login = (props) => {
             Alert.ToastMessage({ title: 'Erro', type: 'error', description: 'Usuário não encontrado!' });
         }
         setLoading(false)
-
     }
 
     return (

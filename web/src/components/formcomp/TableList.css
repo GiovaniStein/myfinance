@@ -40,5 +40,18 @@
     padding: 12px 8px;
 }
 
+.listSearchContainer button {
+    margin-left: 10px;
+}
+
+.searchField.ant-input-affix-wrapper {
+    width: 45% !important;
+}
+
+.listSearchContainer div:last-of-type {
+    width: 100%;
+}
+
+
 
 
