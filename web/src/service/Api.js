@@ -17,17 +17,7 @@ class ListApi {
                 }
             });
             if (!!response.data && response.status === 200) {
-                const countValues = await api.get(`/${endpoint}/count`, {
-                    params:
-                    {
-                        search: search,
-                    }
-                });
-                const paginationData = {
-                    data: response.data,
-                    countValues: parseInt(countValues.data[0].count)
-                }
-                return paginationData;
+                return response.data;
             }
         } catch (e) {
             console.log(e);

@@ -1,8 +1,8 @@
 import React, { Component, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import { DatePicker, Input, Select, Icon } from 'antd';
-import SubmitContent from '../../components/formcomp/SubmitContent'
-
+import { DatePicker, Input, Select, Icon, Spin } from 'antd';
+import SubmitContent from '../../components/formcomp/SubmitContent';
+import Api from '../../service/Api';
 
 const { Option } = Select;
 
@@ -12,14 +12,33 @@ const CreateOperation = (props) => {
     const [operationDate, setOperationDate] = useState(new Date());
     const [operationValue, setOperationValue] = useState(0);
     const [operationCategory, setOperationCategory] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const editObject = props.location.editObject;
 
 
-    /* useEffect(() => {
-        
-    }, []); */
+    useEffect(() => {
+        if (!!editObject) {
+            setOperationDescription(editObject.description);
+            setOperationDate(editObject.date);
+            setOperationValue(editObject.value);
+            setOperationCategory(editObject.category);
+        }
+    }, []);
 
     async function handleSubmit(e) {
+        setLoading(true);
         e.preventDefault();
+        const operation = {
+            description: operationDescription,
+            date: operationDate,
+            value: operationValue,
+            category: operationCategory,
+        }
+        const response = !!editObject ? await Api.CrudApi.update('operation', editObject.id, operation) : await Api.CrudApi.save('operation', operation);
+        if (response) {
+            props.history.push("/home/operation/list");
+        }
+        setLoading(false)
     }
     return (
         <div>
@@ -37,7 +56,7 @@ const CreateOperation = (props) => {
                                 placeholder="Descrição"
                                 name="operation_description" id="operation_description"
                                 required
-                                onChange={e => { }}
+                                onChange={e => {setOperationDescription(e.target.value) }}
                             />
                         </div>
                         <div className="input-container">
@@ -47,7 +66,7 @@ const CreateOperation = (props) => {
                                 placeholder="Data"
                                 name="operation_date" id="operation_date"
                                 required
-                                onChange={e => { }}
+                                onChange={e => { setOperationDate(e)}}
                             />
                         </div>
                         <div className="input-container">
@@ -57,7 +76,7 @@ const CreateOperation = (props) => {
                                 placeholder="Valor"
                                 name="operation_value" id="operation_value"
                                 required
-                                onChange={e => { }}
+                                onChange={e => { setOperationValue(e.target.value)}}
                             />
                         </div>
                         <div className="input-container">
@@ -68,8 +87,8 @@ const CreateOperation = (props) => {
                                 name="operation_category"
                                 placeholder="Selecione uma categoria"
                                 optionFilterProp="children"
-                                onChange={e => {}}
-                                onSearch={e => {}}
+                                onChange={e => { }}
+                                /* onSearch={e => { }} */
                                 filterOption={(input, option) =>
                                     option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                 }
@@ -83,6 +102,9 @@ const CreateOperation = (props) => {
                 </div>
                 <SubmitContent renderCancelButton={false} />
             </form>
+            {loading &&
+                <Spin className="loadIcon" size="large" />
+            }
         </div>
     );
 }

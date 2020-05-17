@@ -18,13 +18,13 @@ CREATE TABLE IF NOT EXISTS "user" (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
-CREATE TABLE IF NOT EXISTS "operation" (
+CREATE TABLE IF NOT EXISTS "location" (
   "id" SERIAL NOT NULL,
   "user_id" INT NOT NULL,
   "category_id" INT NOT NULL,
-  "description" VARCHAR(100) NOT NULL,
-  "date" DATE NOT NULL,
-  "value" DECIMAL(7,2) NOT NULL,
+  "name" VARCHAR(100) NOT NULL,
+  "lat" DOUBLE PRECISION NOT NULL,
+  "long" DOUBLE PRECISION NOT NULL,
   PRIMARY KEY ("id"),
   CONSTRAINT "fk_operation_user"
     FOREIGN KEY ("user_id")
@@ -35,4 +35,25 @@ CREATE TABLE IF NOT EXISTS "operation" (
     FOREIGN KEY ("category_id")
     REFERENCES "category" ("id")
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION);    
+
+CREATE TABLE IF NOT EXISTS "operation" (
+  "id" SERIAL NOT NULL,
+  "user_id" INT NOT NULL,
+  "location_id" INT NOT NULL,
+  "description" VARCHAR(100) NOT NULL,
+  "date" DATE NOT NULL,
+  "value" DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY ("id"),
+  CONSTRAINT "fk_operation_user"
+    FOREIGN KEY ("user_id")
+    REFERENCES "user" ("id")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT "fk_operation_location"
+    FOREIGN KEY ("location_id")
+    REFERENCES "location" ("id")
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+

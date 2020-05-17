@@ -8,8 +8,17 @@ const pool = new Pool({
   port: Config.DB_PORT,
 })
 
-pool.connect();
+
+const executeQuery = (query, params, cb) => {
+  console.info('[QUERY]: ', JSON.stringify(query));
+  pool.query(query, params, (error, results) => {
+    if (error) {
+      throw error
+    }
+    cb(results.rows);
+  })
+};
 
 module.exports = {
-  pool
+  executeQuery,
 }

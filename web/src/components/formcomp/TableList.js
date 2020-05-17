@@ -46,7 +46,7 @@ const TableList = ({ columns, endpoint = '', ...props }) => {
         let results = await Api.ListApi.listValues(endpoint, offset, limit, search);
         if (!!results) {
             setData(results.data)
-            setTotal(results.countValues);
+            setTotal(results.count);
         }
     }
 
