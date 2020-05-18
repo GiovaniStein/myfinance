@@ -43,7 +43,7 @@ const TableList = ({ columns, endpoint = '', ...props }) => {
     }
 
     const getData = async (offset, search = '') => {
-        let results = await Api.ListApi.listValues(endpoint, offset, limit, search);
+        let results = await Api.ListApi.listValuesWithPagination(endpoint, offset, limit, search);
         if (!!results) {
             setData(results.data)
             setTotal(results.count);
@@ -71,6 +71,9 @@ const TableList = ({ columns, endpoint = '', ...props }) => {
             return (
                 <tr key={index}>
                     {keys.map((key, indexKey) => {
+                        if(key.includes('_id')){
+                            return;
+                        }
                         if (key === 'icon') {
                             return (
                                 <td key={`${index}${indexKey}`}><Icon type={column[key]} /> {column[key]}</td>

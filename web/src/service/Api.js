@@ -6,7 +6,7 @@ const api = axios.create({
 })
 
 class ListApi {
-    static listValues = async (endpoint, offset, limit, search) => {
+    static listValuesWithPagination = async (endpoint, offset, limit, search) => {
         try {
             const response = await api.get(`/${endpoint}`, {
                 params:
@@ -20,8 +20,22 @@ class ListApi {
                 return response.data;
             }
         } catch (e) {
-            console.log(e);
+            console.error(e);
+            return {data: [], count:0};
         }
+    }
+
+    static listAll = async (endpoint) => {
+        try {
+            const response = await api.get(`/${endpoint}/list`);
+            if (!!response.data && response.status === 200) {
+                return response.data;
+            }
+        } catch (e) {
+            console.error(e);
+            return [];
+        }
+
     }
 }
 

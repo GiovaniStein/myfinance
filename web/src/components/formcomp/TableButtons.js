@@ -13,7 +13,7 @@ const TableButtons = ({ editObject = {}, endpoint = '', updateTable = () => { },
     }
 
     const disableFunction = (e) => {
-        Alert.showDeleteConfirm('categoria', deleteRow);
+        Alert.showDeleteConfirm('registro', deleteRow);
     }
 
 

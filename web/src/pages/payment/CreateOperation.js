@@ -11,7 +11,8 @@ const CreateOperation = (props) => {
     const [operationDescription, setOperationDescription] = useState('');
     const [operationDate, setOperationDate] = useState(new Date());
     const [operationValue, setOperationValue] = useState(0);
-    const [operationCategory, setOperationCategory] = useState(0);
+    const [operationLocation, setOperationLocation] = useState(0);
+    const [locations, setLocations] = useState([]);
     const [loading, setLoading] = useState(false);
     const editObject = props.location.editObject;
 
@@ -21,9 +22,15 @@ const CreateOperation = (props) => {
             setOperationDescription(editObject.description);
             setOperationDate(editObject.date);
             setOperationValue(editObject.value);
-            setOperationCategory(editObject.category);
+            setOperationLocation(editObject.location_id);
         }
+        getLocations();
     }, []);
+
+    const getLocations = async () => {
+        let locationsList = await Api.ListApi.listAll('location');
+        setLocations(locationsList);
+    }
 
     async function handleSubmit(e) {
         setLoading(true);
@@ -32,7 +39,7 @@ const CreateOperation = (props) => {
             description: operationDescription,
             date: operationDate,
             value: operationValue,
-            category: operationCategory,
+            locationId: operationLocation,
         }
         const response = !!editObject ? await Api.CrudApi.update('operation', editObject.id, operation) : await Api.CrudApi.save('operation', operation);
         if (response) {
@@ -80,22 +87,29 @@ const CreateOperation = (props) => {
                             />
                         </div>
                         <div className="input-container">
-                            <label htmlFor="operation_category">Categoria</label>
+                            <label htmlFor="operation_location">Localização</label>
                             <Select
+                                value={operationLocation}
                                 showSearch
-                                id="operation_category"
-                                name="operation_category"
-                                placeholder="Selecione uma categoria"
+                                required
+                                id="operation_location"
+                                name="operation_location"
+                                placeholder="Selecione um local"
                                 optionFilterProp="children"
-                                onChange={e => { }}
-                                /* onSearch={e => { }} */
+                                onChange={e => { setOperationLocation(e) }}
                                 filterOption={(input, option) =>
                                     option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                 }
                             >
-                                <Option value="jack"> <Icon type="tags" />Teste1</Option>
-                                <Option value="lucy"> <Icon type="tags" />Teste2</Option>
-                                <Option value="tom"> <Icon type="tags" />Teste3</Option>
+                                <Option value={0}> Selecione uma localização</Option>
+                                {locations.map((location, index) => {
+                                    return (
+                                        <Option key={index} value={location.id}>
+                                            {location.name}
+                                        </Option>
+                                    )
+                                })}
+
                             </Select>
                         </div>
                     </div>

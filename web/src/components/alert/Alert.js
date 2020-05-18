@@ -16,7 +16,7 @@ class Alert {
   static showDeleteConfirm = (type, deleteFuction = () => { }) => {
     confirm({
       title: `Excluir ${type}`,
-      content: `Tem certeza que deseja remover o/a ${type}?`,
+      content: `Tem certeza que deseja remover este ${type}?`,
       centered: true,
      onOk() {
         deleteFuction();

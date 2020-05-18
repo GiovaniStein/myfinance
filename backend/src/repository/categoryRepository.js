@@ -10,6 +10,12 @@ const getCategories = (userID, offset, limit, search, cb) => {
     db.executeQuery(query, params, cb);
 }
 
+const getCategoriesCombo = (userID, cb) => {
+    var query = 'SELECT id, name, icon FROM "category" WHERE "user_id" = $1 AND enable = True';
+    var params = [userID];
+    db.executeQuery(query, params, cb);
+}
+
 const countValues = (userID, search, cb) => {
     var query = 'SELECT count(*) FROM "category" WHERE "user_id" = $1';
     var params = [userID];
@@ -45,4 +51,5 @@ module.exports = {
     createCategory,
     updateCategory,
     deleteCategory,
+    getCategoriesCombo,
 } 

@@ -9,7 +9,7 @@ const generateToken = (res, id) => {
     const token = jwt.sign({ id }, secret, {
         expiresIn: expiration,
     });
-    return res.cookie('token', token, {
+    return res.cookie('myFinanceToken', token, {
         expires: new Date(Date.now() + expiration),
         secure: false, // set to true if your using https
         httpOnly: true,
@@ -17,7 +17,7 @@ const generateToken = (res, id) => {
 };
 
 const verifyToken = async (req, res, next) => {
-    const token = req.cookies.token || '';
+    const token = req.cookies.myFinanceToken || '';
     try {
         if (!token) {
             return res.status(401).json('You need to Login');

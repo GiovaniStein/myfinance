@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, withRouter, Route, Switch } from "react-router-dom";
 import ListCategory from '../category/ListCategory';
+import ListLocation from '../location/ListLocation';
 import CreateCategory from '../category/CreateCategory';
 import CreateOperation from '../payment/CreateOperation';
+import CreateLocation from '../location/CreateLocation';
 import ListOperation from '../payment/ListOperation';
 import Dashboard from '../dashboard/Dashboard';
 import { Layout, Menu, Icon } from 'antd';
@@ -50,30 +52,11 @@ const Home = (props) => {
                             <span>Operação</span>
                             <Link to="/home/operation/list" />
                         </Menu.Item>
-                        {/* <SubMenu
-                            key="sub1"
-                            title={
-                                <span>
-                                    <Icon type="tags" />
-                                    <span>Categoria</span>
-                                </span>
-                            }
-                        >
-                            <Menu.ItemGroup key="g1" title="Item 1">
-                                <Menu.Item onClick={renderContent} key="2">
-                                    <Icon type="video-camera" />
-                                    <span>nav 2</span>
-                                </Menu.Item>
-                                <Menu.Item key="3">
-                                    <Icon type="upload" />
-                                    <span>nav 3</span>
-                                </Menu.Item>
-                            </Menu.ItemGroup>
-                            <Menu.ItemGroup key="g2" title="Item 2">
-                                <Menu.Item key="4">Option 3</Menu.Item>
-                                <Menu.Item key="5">Option 4</Menu.Item>
-                            </Menu.ItemGroup>
-                        </SubMenu> */}
+                        <Menu.Item key="4">
+                            <Icon type="shop" />
+                            <span>Locais</span>
+                            <Link to="/home/location/list" />
+                        </Menu.Item>
                     </Menu>
                 </Sider>
                 <Layout>
@@ -99,6 +82,8 @@ const Home = (props) => {
                                 <Route path="/home/category/create" component={CreateCategory} />
                                 <Route path="/home/operation/create" component={CreateOperation} />
                                 <Route path="/home/operation/list" component={ListOperation} />
+                                <Route path="/home/location/list" component={ListLocation} />
+                                <Route path="/home/location/create" component={CreateLocation} />
                                 {/* <PrivateRoute path="/app" component={() => <h1>App</h1>} /> */}
                             </Switch>
                         </div>

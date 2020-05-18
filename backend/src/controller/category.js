@@ -32,7 +32,7 @@ const createCategory = (request, response) => {
             response.status(201).send(true);
         })
     } catch (e) {
-        response.status(500).send(false);
+        response.status(500).send(e);
         throw new Error(e);
     }
 
@@ -64,9 +64,23 @@ const deleteCategory = (request, response) => {
 
 }
 
+const getCategoryCombo = (request, response) => {
+    //const userID = parseInt(request.params.userId);
+    const userId = 1;
+    try {
+        cr.getCategoriesCombo(userId, (values) => {
+            response.status(200).send(values);
+        })
+    } catch (e) {
+        response.status(500).send(e);
+        throw new Error(e);
+    }
+}
+
 module.exports = {
     getCategoriesByUser,
     createCategory,
     updateCategory,
-    deleteCategory
+    deleteCategory,
+    getCategoryCombo,
 } 
