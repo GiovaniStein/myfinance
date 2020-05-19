@@ -1,10 +1,12 @@
 const ur = require('../repository/userRepository');
+const auth = require('../auth/auth');
 
 const verifyLogin = (request, response) => {
     const { email, password } = request.body
     try {
         ur.verifyLogin(email, password, (values) => {
             if(!!values) {
+                auth.generateToken(response, values.id);
                 response.status(200).json(true)
             } else {
                 response.status(401).json(false)

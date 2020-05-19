@@ -7,7 +7,7 @@ import { Link, withRouter } from "react-router-dom";
 
 const OperationList = (props) => {
 
-    const columns = ['Id', 'Descrição', 'Data', 'Valor', 'Local'];
+    const columns = ['Id', 'Descrição', 'Data', 'Valor', 'Local', ''];
 
     return (
 

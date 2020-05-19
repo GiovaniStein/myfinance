@@ -15,7 +15,7 @@ const { PORT, HOST,
         'DB_NAME': DB_NAME || 'myfinance',
         'DB_PASSWORD': DB_PASSWORD || 'postgres',
         'DB_PORT': DB_PORT || 5432,
-        'JWT_EXPIRATION_TIME': JWT_EXPIRATION_TIME || 900000, //milliseconds (15 min)
+        'JWT_EXPIRATION_TIME': JWT_EXPIRATION_TIME || '15m',
         'JWT_SECRET': JWT_SECRET || 'Ae2J6ocabNrR9KXVIkh',
       };
       

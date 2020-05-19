@@ -4,7 +4,7 @@ const getOperationsByUser = (userID, offset, limit, search, cb) => {
     var query = 'SELECT op.id, op.location_id, op.description, op.date, op.value, l.name FROM "operation" op INNER JOIN "location" l ON l.id = op.location_id WHERE op.user_id = $1 ORDER BY op.id ASC OFFSET $2 LIMIT $3';
     var params = [userID, offset, limit];
     if (!!search) {
-        query = 'SELECT op.id, op.location_id, op.description, op.date, op.value, l.name FROM "operation" op INNER JOIN "location" l ON l.id = op.location_id WHERE op.user_id = $1 AND op.desciption LIKE $2 ORDER BY op.id ASC OFFSET $3 LIMIT $4';
+        query = 'SELECT op.id, op.location_id, op.description, op.date, op.value, l.name FROM "operation" op INNER JOIN "location" l ON l.id = op.location_id WHERE op.user_id = $1 AND op.description LIKE $2 ORDER BY op.id ASC OFFSET $3 LIMIT $4';
         params = [userID, '%' + search + '%', offset, limit];
     }
     db.executeQuery(query, params, cb);
@@ -14,7 +14,7 @@ const countValues = (userID, search, cb) => {
     var query = 'SELECT count(*) FROM "operation" WHERE "user_id" = $1';
     var params = [userID];
     if (!!search) {
-        query = 'SELECT count(*) FROM "operation" WHERE "user_id" = $1 AND "name" LIKE $2'
+        query = 'SELECT count(*) FROM "operation" WHERE "user_id" = $1 AND "description" LIKE $2'
         params = [userID, '%' + search + '%'];
     }
     db.executeQuery(query, params, cb);

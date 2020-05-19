@@ -4,6 +4,7 @@ import Pagination from '../pagination/Pagination';
 import { Input, Icon, Button } from 'antd';
 import TableButtons from '../../components/formcomp/TableButtons';
 import Api from '../../service/Api';
+import moment from 'moment'
 
 
 
@@ -82,6 +83,11 @@ const TableList = ({ columns, endpoint = '', ...props }) => {
                         if (key === 'enable') {
                             return (
                                 <td key={`${index}${indexKey}`}>{column[key] ? 'Ativo' : 'Desativado'}</td>
+                            )
+                        }
+                        if (key === 'date') {
+                            return (
+                                <td key={`${index}${indexKey}`}>{moment(column[key]).format('DD/MM/YYYY')}</td>
                             )
                         }
                         return (

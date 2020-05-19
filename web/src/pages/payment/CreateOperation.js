@@ -3,13 +3,14 @@ import { withRouter } from "react-router-dom";
 import { DatePicker, Input, Select, Icon, Spin } from 'antd';
 import SubmitContent from '../../components/formcomp/SubmitContent';
 import Api from '../../service/Api';
+import moment from 'moment'
 
 const { Option } = Select;
 
 const CreateOperation = (props) => {
 
     const [operationDescription, setOperationDescription] = useState('');
-    const [operationDate, setOperationDate] = useState(new Date());
+    const [operationDate, setOperationDate] = useState(moment(new Date()));
     const [operationValue, setOperationValue] = useState(0);
     const [operationLocation, setOperationLocation] = useState(0);
     const [locations, setLocations] = useState([]);
@@ -20,7 +21,7 @@ const CreateOperation = (props) => {
     useEffect(() => {
         if (!!editObject) {
             setOperationDescription(editObject.description);
-            setOperationDate(editObject.date);
+            setOperationDate(moment(editObject.date));
             setOperationValue(editObject.value);
             setOperationLocation(editObject.location_id);
         }
@@ -37,7 +38,7 @@ const CreateOperation = (props) => {
         e.preventDefault();
         const operation = {
             description: operationDescription,
-            date: operationDate,
+            date: operationDate.toDate(),
             value: operationValue,
             locationId: operationLocation,
         }
@@ -61,6 +62,7 @@ const CreateOperation = (props) => {
                             <Input
                                 type="text"
                                 placeholder="Descrição"
+                                value={operationDescription}
                                 name="operation_description" id="operation_description"
                                 required
                                 onChange={e => {setOperationDescription(e.target.value) }}
@@ -70,6 +72,7 @@ const CreateOperation = (props) => {
                             <label htmlFor="operation_date">Data</label>
                             <DatePicker
                                 type="text"
+                                value={operationDate}
                                 placeholder="Data"
                                 name="operation_date" id="operation_date"
                                 required
@@ -81,6 +84,7 @@ const CreateOperation = (props) => {
                             <Input
                                 type="number"
                                 placeholder="Valor"
+                                value={operationValue}
                                 name="operation_value" id="operation_value"
                                 required
                                 onChange={e => { setOperationValue(e.target.value)}}

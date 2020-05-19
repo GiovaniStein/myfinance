@@ -14,7 +14,7 @@ const getOperationsByUser = (request, response) => {
             }
             or.countValues(userID, search, (countValues) => {
                 operations.count = parseInt(countValues[0].count);
-                response.status(200).json(categories);
+                response.status(200).json(operations);
             })
         })
     } catch (e) {
@@ -24,11 +24,11 @@ const getOperationsByUser = (request, response) => {
 }
 
 const createOperation = (request, response) => {
-    const { location_id, description, date, value } = request.body;
+    const { locationId, description, date, value } = request.body;
     //const userID = parseInt(request.params.userId);
     const userId = 1;
     try {
-        or.createOperation(userId, location_id, description, date, value, (values) => {
+        or.createOperation(userId, locationId, description, date, value, (values) => {
             response.status(201).send(true);
         })
     } catch (e) {
@@ -39,9 +39,9 @@ const createOperation = (request, response) => {
 
 const updateOperation = (request, response) => {
     const id = parseInt(request.params.id);
-    const { location_id, description, date, value } = request.body;
+    const { locationId, description, date, value } = request.body;
     try {
-        or.updateOperation(id, location_id, description, date, value, (values) => {
+        or.updateOperation(id, locationId, description, date, value, (values) => {
             response.status(200).send(true);
         })
     } catch (e) {
