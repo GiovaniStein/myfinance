@@ -3,6 +3,7 @@ const user = require('./controller/user');
 const category = require('./controller/category');
 const location = require('./controller/location');
 const operation = require('./controller/operation');
+const auth = require('./auth/auth');
 
 const routes = Router();
 
@@ -16,7 +17,7 @@ routes.post('/users/login', user.verifyLogin);
 
 routes.put('/users/:id', user.updateUser);
 
-routes.get('/category', category.getCategoriesByUser);
+routes.get('/category', auth.verifyToken, category.getCategoriesByUser);
 
 routes.post('/category', category.createCategory);
 

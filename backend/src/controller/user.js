@@ -6,10 +6,10 @@ const verifyLogin = (request, response) => {
     try {
         ur.verifyLogin(email, password, (values) => {
             if(!!values) {
-                auth.generateToken(response, values.id);
-                response.status(200).json(true)
+                auth.generateToken(response, values[0].id);
+                response.status(200).json(values[0]);
             } else {
-                response.status(401).json(false)
+                response.status(401).json(false);
             }
         })
     } catch (e) {

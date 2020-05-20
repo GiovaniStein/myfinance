@@ -1,8 +1,8 @@
 const db = require('./database');
 
 const verifyLogin = (login, password, cb) => {
-    var query = 'SELECT * FROM "user" WHERE "email" = $1 and "password" = $2';
-    var params = [login, password];
+    var query = 'SELECT * FROM "user" WHERE "email" LIKE $1 and "password" LIKE $2';
+    var params = ['%'+ login +'%', '%'+ password +'%'];
     db.executeQuery(query, params, cb);
 }
 

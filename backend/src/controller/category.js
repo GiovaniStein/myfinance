@@ -1,8 +1,7 @@
 const cr = require('../repository/categoryRepository');
 
 const getCategoriesByUser = (request, response) => {
-    //const userID = parseInt(request.params.userId);
-    const userID = 1;
+    const userID = parseInt(request.params.userID);
     const offset = parseInt(request.query.offset);
     const limit = parseInt(request.query.limit);
     const search = request.query.search;
