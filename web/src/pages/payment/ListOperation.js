@@ -1,7 +1,6 @@
-import React, { Component, useState, useEffect } from "react";
+import React from "react";
 import TableList from '../../components/formcomp/TableList'
-import { Input, Icon, Button } from 'antd';
-import TableButtons from '../../components/formcomp/TableButtons';
+import { Icon, Button } from 'antd';
 import { Link, withRouter } from "react-router-dom";
 
 

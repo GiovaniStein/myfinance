@@ -1,32 +1,46 @@
-import React from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import CreateUser from "./pages/user/CreateUser";
+import PrivateRoute from "./components/routes/PrivateRoute";
+import {useUserAuth} from './context/AppContext';
+import Api from './service/Api';
 
-/* const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route
-      {...rest}
-      render={props =>
-        isAuthenticated() ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to={{ pathname: "/", state: { from: props.location } }} />
-        )
-      }
-    />
-  ); */
-  
-  const Routes = () => (
+
+const Routes = (props) => {
+
+
+  const [isFinish, setIsFinish] = useState(false);
+
+  const {setUserAuth} = useUserAuth();
+
+  useEffect(() => {
+    setIsFinish(false);
+    const userAuth = async () => {
+      let auth = await Api.UserApi.verifyAuth();
+      console.log('routes ', auth);
+      setUserAuth(auth);
+      setIsFinish(true);
+    }
+    userAuth();
+  }, []);
+
+  if (!isFinish) {
+    return null;
+  }
+
+  return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Login} />
         <Route path="/user" component={CreateUser} />
-        <Route path="/home" component={Home} />
-        {/* <PrivateRoute path="/app" component={() => <h1>App</h1>} /> */}
+        <PrivateRoute path="/home" component={Home} />
         <Route path="*" component={() => <h1>Page not found</h1>} />
       </Switch>
     </BrowserRouter>
-  );
-  
-  export default Routes;
+  )
+}
+
+
+export default Routes;

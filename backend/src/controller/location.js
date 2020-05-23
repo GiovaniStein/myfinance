@@ -1,8 +1,7 @@
 const lr = require('../repository/locationRepository');
 
 const getLocationsByUser = (request, response) => {
-    //const userID = parseInt(request.params.userId);
-    const userID = 1;
+    const userID = parseInt(request.params.userID);
     const offset = parseInt(request.query.offset);
     const limit = parseInt(request.query.limit);
     const search = request.query.search;
@@ -25,10 +24,9 @@ const getLocationsByUser = (request, response) => {
 
 const createLocation = (request, response) => {
     const { categoryId, name, lat, long, enable } = request.body;
-    //const userID = parseInt(request.params.userId);
-    const userId = 1;
+    const userID = parseInt(request.params.userID);
     try {
-        lr.createLocation(userId, categoryId, name, lat, long, enable, (values) => {
+        lr.createLocation(userID, categoryId, name, lat, long, enable, (values) => {
             response.status(201).send(true);
         })
     } catch (e) {
@@ -38,10 +36,9 @@ const createLocation = (request, response) => {
 }
 
 const getLocationCombo = (request, response) => {
-    //const userID = parseInt(request.params.userId);
-    const userId = 1;
+    const userID = parseInt(request.params.userID);
     try {
-        lr.getLocationsCombo(userId, (values) => {
+        lr.getLocationsCombo(userID, (values) => {
             response.status(200).send(values);
         })
     } catch (e) {

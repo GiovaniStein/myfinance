@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { DatePicker, Input, Select, Icon, Spin } from 'antd';
 import SubmitContent from '../../components/formcomp/SubmitContent';
@@ -44,9 +44,9 @@ const CreateOperation = (props) => {
         }
         const response = !!editObject ? await Api.CrudApi.update('operation', editObject.id, operation) : await Api.CrudApi.save('operation', operation);
         if (response) {
+            setLoading(false);
             props.history.push("/home/operation/list");
         }
-        setLoading(false)
     }
     return (
         <div>

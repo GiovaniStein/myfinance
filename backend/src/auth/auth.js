@@ -18,8 +18,8 @@ const generateToken = (res, id) => {
 };
 
 const verifyToken = async (req, res, next) => {
-    const token = req.cookies.myFinanceToken || '';
     try {
+        const token = req.cookies.myFinanceToken || '';
         if (!token) {
             return res.status(401).json('You need to Login');
         }
@@ -27,12 +27,23 @@ const verifyToken = async (req, res, next) => {
         req.params.userID = decrypt.id;
         next();
     } catch (err) {
-        return res.status(500).json(err.toString());
+        return res.status(401).json(err.toString());
     }
 };
+
+const verifyAuth = async (req, res) => {
+    try {
+        const token = req.cookies.myFinanceToken || '';
+        await jwt.verify(token, secret);
+        return res.status(200).json(true);
+    } catch (err) {
+        return res.status(401).json(false);
+    }
+}
 
 
 module.exports = {
     verifyToken,
     generateToken,
+    verifyAuth,
 }

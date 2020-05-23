@@ -31,9 +31,9 @@ const CreateCategory = (props) => {
         }
         const response = !!editObject ? await Api.CrudApi.update('category', editObject.id, category) : await Api.CrudApi.save('category', category);
         if (response) {
+            setLoading(false);
             props.history.push("/home/category/list");
         }
-        setLoading(false)
     }
     return (
         <div>

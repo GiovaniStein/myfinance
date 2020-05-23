@@ -1,8 +1,10 @@
 import axios from 'axios';
 import Alert from '../components/alert/Alert'
 
+
 const api = axios.create({
-    baseURL: 'http://localhost:3333'
+    baseURL: 'http://localhost:3333',
+    withCredentials: true,
 })
 
 class ListApi {
@@ -43,12 +45,21 @@ class ListApi {
 class UserApi {
     static verifyLogin = async (email, password) => {
         try {
-            const response = await api.post('/users/login', { email, password });
+            const response = await api.post('/users/login', {email, password});
             if (!!response.data && response.status === 200) {
-                return response.data[0];
+                return response.data;
             }
         } catch (e) {
             console.error(e);
+            return false;
+        }
+    }
+
+    static verifyAuth = async () => {
+        try {
+            const response = await api.get('/auth');
+            return response.data;
+        } catch (e) {
             return false;
         }
     }

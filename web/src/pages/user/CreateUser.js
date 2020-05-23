@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import '../login/Login.css';
 import Api from '../../service/Api';

@@ -11,39 +11,43 @@ const routes = Router();
 //Route Params: request.params
 //Body: request.body
 
+//Public Api
 routes.post('/users', user.createUser);
 
 routes.post('/users/login', user.verifyLogin);
 
-routes.put('/users/:id', user.updateUser);
+routes.get('/auth', auth.verifyAuth);
 
+
+//Private Api
 routes.get('/category', auth.verifyToken, category.getCategoriesByUser);
 
-routes.post('/category', category.createCategory);
+routes.post('/category', auth.verifyToken, category.createCategory);
 
-routes.delete('/category/:id', category.deleteCategory);
+routes.delete('/category/:id', auth.verifyToken, category.deleteCategory);
 
-routes.put('/category/:id', category.updateCategory);
+routes.put('/category/:id', auth.verifyToken, category.updateCategory);
 
-routes.get('/category/list', category.getCategoryCombo);
+routes.get('/category/list', auth.verifyToken, category.getCategoryCombo);
 
-routes.get('/location', location.getLocationsByUser);
+routes.get('/location', auth.verifyToken, location.getLocationsByUser);
 
-routes.post('/location', location.createLocation);
+routes.post('/location', auth.verifyToken, location.createLocation);
 
-routes.delete('/location/:id', location.deleteLocation);
+routes.delete('/location/:id', auth.verifyToken, location.deleteLocation);
 
-routes.put('/location/:id', location.updateLocation);
+routes.put('/location/:id', auth.verifyToken, location.updateLocation);
 
-routes.get('/location/list', location.getLocationCombo);
+routes.get('/location/list', auth.verifyToken, location.getLocationCombo);
 
-routes.get('/operation', operation.getOperationsByUser);
+routes.get('/operation', auth.verifyToken, operation.getOperationsByUser);
 
-routes.post('/operation', operation.createOperation);
+routes.post('/operation', auth.verifyToken, operation.createOperation);
 
-routes.delete('/operation/:id', operation.deleteOperation);
+routes.delete('/operation/:id', auth.verifyToken, operation.deleteOperation);
 
-routes.put('/operation/:id', operation.updateOperation);
+routes.put('/operation/:id', auth.verifyToken, operation.updateOperation);
 
+/* routes.put('/users/:id', user.updateUser); */
 
 module.exports = routes;

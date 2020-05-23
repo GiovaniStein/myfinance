@@ -45,9 +45,9 @@ const CreateLocation = (props) => {
         }
         const response = !!editObject ? await Api.CrudApi.update('location', editObject.id, location) : await Api.CrudApi.save('location', location);
         if (response) {
+            setLoading(false);
             props.history.push("/home/location/list");
         }
-        setLoading(false)
     }
     return (
         <div>

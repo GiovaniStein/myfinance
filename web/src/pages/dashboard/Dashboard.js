@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, withRouter, Route, Switch } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import './Dashboard.css'
 
 const Dashboard = () => {

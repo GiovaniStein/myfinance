@@ -1,8 +1,7 @@
 const or = require('../repository/operationRepository');
 
 const getOperationsByUser = (request, response) => {
-    //const userID = parseInt(request.params.userId);
-    const userID = 1;
+    const userID = parseInt(request.params.userID);
     const offset = parseInt(request.query.offset);
     const limit = parseInt(request.query.limit);
     const search = request.query.search;
@@ -25,10 +24,9 @@ const getOperationsByUser = (request, response) => {
 
 const createOperation = (request, response) => {
     const { locationId, description, date, value } = request.body;
-    //const userID = parseInt(request.params.userId);
-    const userId = 1;
+    const userID = parseInt(request.params.userID);
     try {
-        or.createOperation(userId, locationId, description, date, value, (values) => {
+        or.createOperation(userID, locationId, description, date, value, (values) => {
             response.status(201).send(true);
         })
     } catch (e) {

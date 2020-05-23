@@ -2,15 +2,15 @@ import React from 'react';
 import './global.css';
 import Routes from "./routes";
 import 'antd/dist/antd.css';
-import {Provider} from 'react-redux'
-import store from './store/index';
+import {AppProvider} from './context/AppContext';
+
 
 
 const App = () => {
-    return(
-        <Provider store={store}>
-            <Routes />;
-        </Provider>
+    return (
+        <AppProvider >
+            <Routes />
+        </AppProvider>
     )
 }
 

@@ -24,10 +24,9 @@ const getCategoriesByUser = (request, response) => {
 
 const createCategory = (request, response) => {
     const { name, icon, enable } = request.body;
-    //const userID = parseInt(request.params.userId);
-    const userId = 1;
+    const userID = parseInt(request.params.userID);
     try {
-        cr.createCategory(name, icon, enable, userId, (values) => {
+        cr.createCategory(name, icon, enable, userID, (values) => {
             response.status(201).send(true);
         })
     } catch (e) {
@@ -64,10 +63,9 @@ const deleteCategory = (request, response) => {
 }
 
 const getCategoryCombo = (request, response) => {
-    //const userID = parseInt(request.params.userId);
-    const userId = 1;
+    const userID = parseInt(request.params.userID);
     try {
-        cr.getCategoriesCombo(userId, (values) => {
+        cr.getCategoriesCombo(userID, (values) => {
             response.status(200).send(values);
         })
     } catch (e) {

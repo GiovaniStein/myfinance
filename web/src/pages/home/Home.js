@@ -9,21 +9,10 @@ import ListOperation from '../payment/ListOperation';
 import Dashboard from '../dashboard/Dashboard';
 import { Layout, Menu, Icon } from 'antd';
 import './Home.css';
-import { useSelector, useDispatch } from 'react-redux';
 
 const { Header, Sider, Content } = Layout;
 
-const { SubMenu } = Menu;
-
 const Home = (props) => {
-
-   const user = useSelector(state =>  state.user);
-
-    const dispatch = useDispatch();
-
-    const changeUser = () => { 
-        dispatch({type: 'LOGIN_USER', user:{id: user == null ? 0 : user.id+1, nome: user == null ? '' : user.nome+'a'}})
-    }
 
     useEffect(() => {
         props.history.push("/home/dashboard");
@@ -84,7 +73,6 @@ const Home = (props) => {
                                 <Route path="/home/operation/list" component={ListOperation} />
                                 <Route path="/home/location/list" component={ListLocation} />
                                 <Route path="/home/location/create" component={CreateLocation} />
-                                {/* <PrivateRoute path="/app" component={() => <h1>App</h1>} /> */}
                             </Switch>
                         </div>
                     </Content>

@@ -1,10 +1,11 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import './Login.css';
 import Api from '../../service/Api';
 import Alert from '../../components/alert/Alert'
-import { Spin, Input, Icon} from 'antd';
+import { Spin, Input, Icon } from 'antd';
 import Utils from '../../utils/Utils';
+import {useUserAuth} from '../../context/AppContext';
 
 const Login = (props) => {
 
@@ -12,30 +13,32 @@ const Login = (props) => {
     const [user_password, setUserPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
+    const {setUserAuth} = useUserAuth();
 
-    async function handleSubmit(e) {
+    const handleSubmit = async (e) => {
         setLoading(true);
         e.preventDefault();
         let password = await Utils.encodeSha256(user_password);
         const response = await Api.UserApi.verifyLogin(user_email, password);
         if (!!response) {
+            setLoading(false);
+            setUserAuth(true);
             props.history.push("/home");
         } else {
+            setLoading(false);
             Alert.ToastMessage({ title: 'Erro', type: 'error', description: 'Usuário não encontrado!' });
         }
-        setLoading(false)
     }
 
     return (
         <div className="mainDiv">
             <div id="app">
                 <div className="loginFormContainer">
-
                     <div className="titleForm">
                         <Icon type="login" />
                         <strong>Login</strong>
                     </div>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={e => { handleSubmit(e) }}>
                         <div className="input-container">
                             <label htmlFor="user_email">Email</label>
                             <Input type="email"
@@ -45,7 +48,6 @@ const Login = (props) => {
                                 required
                                 onChange={e => { setUserEmail(e.target.value) }}
                             />
-
                         </div>
 
                         <div className="input-container">
